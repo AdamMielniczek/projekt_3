@@ -1,6 +1,6 @@
 #include <sstream>
 #include "plansza.h"
-
+#include "gra.h"
 Plansza::Plansza(unsigned char rozmiar, unsigned char liczba_w_rzedzie) : rozmiar(rozmiar), liczba_w_rzedzie(liczba_w_rzedzie) {
     for (unsigned char i = 0; i < rozmiar; i++) {
         for (unsigned char j = 0; j < rozmiar; j++) {
@@ -59,7 +59,9 @@ unsigned char Plansza::wezRozmiar() {
 char Plansza::czyWygrana() {
     unsigned char o_licznik = 0;
     unsigned char x_licznik = 0;
-
+    if (!czyZostalyRuchy()) {
+        return remis;
+    }
     //sprawdz kolumny
     for (unsigned char i = 0; i < rozmiar; ++i) {
         o_licznik = 0;
@@ -85,7 +87,7 @@ char Plansza::czyWygrana() {
     }
 
     //sprawdz wiersze
-    // TODO: skleic w mniej petli
+
     for (unsigned char i = 0; i < rozmiar; ++i) {
         o_licznik = 0;
         x_licznik = 0;

@@ -20,10 +20,7 @@ void Gra::start() {
             kolejGracza();
         }
 
-        if (!plansza->czyZostalyRuchy()) {
-            int ow = plansza->czyWygrana();
-            zakonczGre(ow == remis);
-        }
+
 
         zmienGracza();
 
@@ -140,6 +137,7 @@ void Gra::kolejKomputera() {
 }
 
 void Gra::zmienGracza() {
+    zakonczGre(plansza->czyWygrana());
     if (aktualnyGracz == krzyzyk) {
         aktualnyGracz = kolko;
     } else {
