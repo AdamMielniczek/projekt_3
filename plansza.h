@@ -1,30 +1,34 @@
 #ifndef PLANSZA_H_INCLUDED
 #define PLANSZA_H_INCLUDED
 #include <iostream>
+#include <vector>
 
-#define ROZMIAR 10
+#define ROZMIAR 6
 
 using namespace std;
 
-const int remis = -1;
-const int puste = 0;
-const int krzyzyk = 1;
-const int kolko = 2;
-const int nikt = 3;
+const char remis = -1;
+const char puste = 0;
+const char krzyzyk = 1;
+const char kolko = 2;
+const char nikt = 3;
+
 
 class Plansza{
-    int rozmiar;
-    int liczba_w_rzedzie;
-    int pole[ROZMIAR][ROZMIAR] ;
+    unsigned char rozmiar;
+    unsigned char liczba_w_rzedzie;
+    char pole[ROZMIAR][ROZMIAR];
 
 public:
-    Plansza(int rozmiar, int liczba_wygrana);
+    Plansza(unsigned char rozmiar, unsigned char liczba_w_rzedzie);
     void wyswietlPlansze();
-    int wez_wartosc(int kolumna, int wiersz);
-    void ustaw_wartosc(int kolumna, int wiersz, int wartosc);
-    int wez_rozmiar();
-    int czyWygrana();
+    char wez_wartosc(unsigned char kolumna, unsigned char wiersz);
+    void ustaw_wartosc(unsigned char kolumna, unsigned char wiersz, char wartosc);
+    unsigned char wezRozmiar();
+    char czyWygrana();
     bool czyZostalyRuchy();
+//    std::vector<char> serialize();
+    std::string stringify();
 };
 
 
