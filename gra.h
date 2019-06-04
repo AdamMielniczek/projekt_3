@@ -11,15 +11,15 @@ public:
     void start();
 
 private:
-    void rozpocznij();
+    void menu();
     void kolejGracza();
     void kolejKomputera();
     void zmienGracza();
     void zakonczGre(int Kto);
 
     Plansza* plansza;
-    int aktualnyGracz;
-    int komputer;
+    unsigned char aktualnyGracz;
+    unsigned char komputer;
     Stan status;
     MINIMAX minimax;
     bool multiplayer;

@@ -7,8 +7,8 @@ using namespace std;
 //main zajmuje sie tylko samym odpaleniem gry
 int main()
 {
-    Gra kolkokrzyzyk;
-    kolkokrzyzyk.start();
+    auto kolkokrzyzyk = new Gra();
+    kolkokrzyzyk->start();
 
     return 0;
 }

@@ -3,7 +3,7 @@
 #include "plansza.h"
 
 void Gra::start() {
-    rozpocznij();
+    menu();
 
     while (status != WYJSCIE) {
         plansza->wyswietlPlansze();
@@ -19,14 +19,11 @@ void Gra::start() {
         } else {
             kolejGracza();
         }
+
         if (!plansza->czyZostalyRuchy()) {
-            zakonczGre(remis);
+            int ow = plansza->czyWygrana();
+            zakonczGre(ow == remis);
         }
-        if (plansza->czyZostalyRuchy()) {
-            zakonczGre(plansza->czyWygrana());
-        }
-
-
 
         zmienGracza();
 
@@ -34,8 +31,8 @@ void Gra::start() {
     }
 }
 
-void Gra::rozpocznij() {
-    int M, A;
+void Gra::menu() {
+    unsigned char M, A;
     cout << "\n GRA KOLKO I KRZYZYK \n\n";
     cout << "Wprowadz rozmiar planszy M (ilosc wierszy i ilosc kolumn),\n";
     cout << "a nastepnie podaj ile symboli musi sie znajdowac pod rzad,\n";
@@ -45,6 +42,13 @@ void Gra::rozpocznij() {
     cin >> M;
     cout << "A = ";
     cin >> A;
+
+    if(M >= 48){
+        M -= 48;
+    }
+    if(A >= 48){
+        A -= 48;
+    }
 
     status = GRA;
     plansza = new Plansza(M, A);
@@ -97,7 +101,7 @@ void Gra::rozpocznij() {
 
 void Gra::kolejGracza() {
     bool bylDobry = false;
-    int x, y;
+    unsigned char x, y;
 
     do {
         cout << "Numer kolumny: ";
@@ -112,18 +116,23 @@ void Gra::kolejGracza() {
             cin.ignore(1000, '\n');
             cout << "Blad!";
         }
+        if(x >= 48){
+            x -= 48;
+        }
+        if(y >= 48){
+            y -= 48;
+        }
 
-        if (x < 1 || y < 1 || x > plansza->wez_rozmiar() || y > plansza->wez_rozmiar()) {
+        if (x < 1 || y < 1 || x > plansza->wezRozmiar() || y > plansza->wezRozmiar()) {
             cout << "Zbyt duze lub zbyt male wartosci!\n";
         } else if (plansza->wez_wartosc(x - 1, y - 1) != puste) {
-            cout << "Plansza juz jest zajete!\n";
+            cout << "Pole juz jest zajete!\n";
         } else {
             bylDobry = true;
         }
     } while (!bylDobry);
 
     plansza->ustaw_wartosc(x - 1, y - 1, aktualnyGracz);
-
 }
 
 void Gra::kolejKomputera() {
@@ -171,7 +180,7 @@ void Gra::zakonczGre(int Kto) {
     if (wej == 'W' || wej == 'w') {
         status = WYJSCIE;
     } else {
-        rozpocznij();
+        menu();
     }
 }
 
