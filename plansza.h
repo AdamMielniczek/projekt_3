@@ -10,7 +10,7 @@ const int remis = -1;
 const int puste = 0;
 const int krzyzyk = 1;
 const int kolko = 2;
-
+const int nikt = 3;
 
 class Plansza{
     int rozmiar;

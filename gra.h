@@ -14,8 +14,8 @@ private:
     void rozpocznij();
     void kolejGracza();
     void kolejKomputera();
-    void zmien_gracza();
-    void zakoncz_gre(bool bylRemis);
+    void zmienGracza();
+    void zakonczGre(int Kto);
 
     Plansza* plansza;
     int aktualnyGracz;

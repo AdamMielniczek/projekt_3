@@ -198,7 +198,7 @@ int Plansza::czyWygrana() {
     }
 
     //jesli nic innego nie jest poprawne to wtedy jest remis
-    return remis;
+    return nikt;
 }
 
 

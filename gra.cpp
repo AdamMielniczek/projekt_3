@@ -1,5 +1,6 @@
 #include "gra.h"
 #include <string>
+#include "plansza.h"
 
 void Gra::start() {
     rozpocznij();
@@ -18,13 +19,16 @@ void Gra::start() {
         } else {
             kolejGracza();
         }
-
         if (!plansza->czyZostalyRuchy()) {
-            int ow = plansza->czyWygrana();
-            zakoncz_gre(ow == remis);
+            zakonczGre(remis);
+        }
+        if (plansza->czyZostalyRuchy()) {
+            zakonczGre(plansza->czyWygrana());
         }
 
-        zmien_gracza();
+
+
+        zmienGracza();
 
         cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
     }
@@ -119,13 +123,14 @@ void Gra::kolejGracza() {
     } while (!bylDobry);
 
     plansza->ustaw_wartosc(x - 1, y - 1, aktualnyGracz);
+
 }
 
 void Gra::kolejKomputera() {
     minimax.wykonajRuch(plansza);
 }
 
-void Gra::zmien_gracza() {
+void Gra::zmienGracza() {
     if (aktualnyGracz == krzyzyk) {
         aktualnyGracz = kolko;
     } else {
@@ -134,17 +139,19 @@ void Gra::zmien_gracza() {
 }
 
 
-void Gra::zakoncz_gre(bool bylRemis) {
+void Gra::zakonczGre(int Kto) {
 
     plansza->wyswietlPlansze();
-
-    if (bylRemis) {
+    if (Kto==nikt){
+        return ;
+    }
+    if (Kto==remis) {
         cout << "\n\n REMIS!\n";
         cout << "\n\n wcisnij dowolna litere i enter,\n";
         cout << " zeby kontynuowac \n ";
         cout << " lub W zeby zakonczyc: ";
     } else {
-        if (aktualnyGracz == krzyzyk) {
+        if (Kto == krzyzyk) {
             cout << "\n\n KRZYZYK WYGRAL!\n";
             cout << "\n\n wcisnij dowolna litere i enter,\n";
             cout << " zeby kontynuowac \n ";
